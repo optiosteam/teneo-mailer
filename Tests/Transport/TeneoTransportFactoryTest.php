@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Component\Mailer\Bridge\Sendgrid\Tests\Transport;
+namespace Tests\Optios\Mailer\Teneo\Transport;
 
 use Optios\Mailer\Teneo\Transport\TeneoApiTransport;
 use Optios\Mailer\Teneo\Transport\TeneoTransportFactory;
