@@ -16,7 +16,7 @@ class TeneoApiTransportTest extends TestCase
      */
     public function testToString(TeneoApiTransport $transport, string $expectedDsn)
     {
-        $this->assertEquals($expectedDsn, (string)$transport);
+        $this->assertEquals($expectedDsn, (string) $transport);
     }
 
     public function getTransportData()
@@ -41,9 +41,9 @@ class TeneoApiTransportTest extends TestCase
     {
         $email = new Email();
         $email->from(new Address('foo@example.com', 'Ms. Foo Bar'))
-              ->to(new Address('bar@example.com', 'Mr. Recipient'))
-              ->bcc('baz@example.com')
-              ->text('content');
+            ->to(new Address('bar@example.com', 'Mr. Recipient'))
+            ->bcc('baz@example.com')
+            ->text('content');
 
         $response = $this->createMock(ResponseInterface::class);
 
