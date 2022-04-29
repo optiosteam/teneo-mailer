@@ -1,5 +1,6 @@
 [![CI](https://github.com/optiosteam/teneo-mailer/actions/workflows/tests.yaml/badge.svg?branch=main)](https://github.com/optiosteam/teneo-mailer/actions/workflows/tests.yaml)
 [![codecov](https://codecov.io/gh/optiosteam/teneo-mailer/branch/main/graph/badge.svg?token=S62YDUXV7A)](https://codecov.io/gh/optiosteam/teneo-mailer)
+![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/optios/teneo-mailer)
 
 # Teneo Bridge
 
