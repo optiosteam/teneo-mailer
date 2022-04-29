@@ -2,7 +2,6 @@
 
 namespace Optios\Mailer\Teneo\Transport;
 
-use http\Client\Response;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Mailer\Envelope;
