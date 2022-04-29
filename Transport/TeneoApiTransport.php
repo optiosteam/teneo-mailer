@@ -18,9 +18,6 @@ use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
-/**
- * @author Kevin Verschaeve
- */
 class TeneoApiTransport extends AbstractApiTransport
 {
     private const HOST = 'tlsrelay.teneo.be';
@@ -162,10 +159,6 @@ class TeneoApiTransport extends AbstractApiTransport
         return $payload;
     }
 
-    /**
-     * Private method is sued on line 138
-     * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
-     */
     private function getAddressPayload(Address $address): array
     {
         $payload = ['email' => $address->getAddress()];
