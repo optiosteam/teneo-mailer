@@ -1,0 +1,31 @@
+{
+  "name": "optios/teneo-mailer",
+  "type": "teneo-mailer-bridge",
+  "description": "Symfony Teneo Mailer Bridge",
+  "keywords": [],
+  "homepage": "https://symfony.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Optios",
+      "homepage": "https://www.optios.net"
+    }
+  ],
+  "require": {
+    "php": ">=7.2.5",
+    "psr/event-dispatcher": "^1",
+    "symfony/mailer": "^4.4|^5.0|^6.0"
+  },
+  "require-dev": {
+    "symfony/http-client": "^4.4|^5.0|^6.0",
+    "phpunit/phpunit": "^9.5",
+    "squizlabs/php_codesniffer": "4.0.x-dev"
+  },
+  "autoload": {
+    "psr-4": { "Optios\\Mailer\\Teneo\\": "" },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  },
+  "minimum-stability": "dev"
+}
