@@ -20,7 +20,7 @@ class TeneoApiTransportTest extends TestCase
      */
     public function testToString(TeneoApiTransport $transport, string $expectedDsn)
     {
-        $this->assertEquals($expectedDsn, (string)$transport);
+        $this->assertEquals($expectedDsn, (string) $transport);
     }
 
     public function getTransportData()
