@@ -20,7 +20,7 @@ class TeneoApiTransportTest extends TestCase
      */
     public function testToString(TeneoApiTransport $transport, string $expectedDsn)
     {
-        $this->assertEquals($expectedDsn, (string) $transport);
+        $this->assertEquals($expectedDsn, (string)$transport);
     }
 
     public function getTransportData()
@@ -162,9 +162,11 @@ class TeneoApiTransportTest extends TestCase
                                 'headers' => [],
                                 'from_name' => 'Ms. Foo Bar',
                                 'attachments' => [
-                                    'content_base64' => 'dGVzdGNvbnRlbnQ=',
-                                    'filename' => 'test.jpg',
-                                    'content_type' => 'image/jpeg'
+                                    0 => [
+                                        'content_base64' => 'dGVzdGNvbnRlbnQ=',
+                                        'filename' => 'test.jpg',
+                                        'content_type' => 'image/jpeg',
+                                    ]
                                 ]
                             ]
                         ]
