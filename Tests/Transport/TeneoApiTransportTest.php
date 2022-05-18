@@ -116,10 +116,62 @@ class TeneoApiTransportTest extends TestCase
             ->text('content')
             ->attach('testcontent', 'test.jpg', 'image/jpeg');
 
-        $this->expectException(TransportException::class);
-        $this->expectExceptionMessage('Teneo api does not support attachments.');
+        $response = $this->createMock(ResponseInterface::class);
+
+        $response
+            ->expects($this->once())
+            ->method('getStatusCode')
+            ->willReturn(200);
+
+        $response
+            ->expects($this->once())
+            ->method('getInfo')
+            ->willReturn(null);
+
+        $response
+            ->expects($this->once())
+            ->method('toArray')
+            ->with(false)
+            ->willReturn(['success' => true, 'messages' => [['success' => true, 'message_id' => 'mid-1']]]);
 
         $httpClient = $this->createMock(HttpClientInterface::class);
+        $httpClient->expects($this->once())
+            ->method('request')
+            ->with(
+                'POST',
+                'https://tlsrelay.teneo.be/api/v1/send.json',
+                [
+                    'verify_peer' => false,
+                    'verify_host' => false,
+                    'json' => [
+                        'username' => 'mailclass-test@tlsrelay.teneo.be',
+                        'password' => 'bar',
+                        'messages' => [
+                            [
+                                'mailclass' => 'test',
+                                'html' => null,
+                                'text' => 'content',
+                                'subject' => null,
+                                'to' => [
+                                    [
+                                        'email' => 'bar@example.com',
+                                        'name' => 'Mr. Recipient'
+                                    ]
+                                ],
+                                'from_email' => 'foo@example.com',
+                                'headers' => [],
+                                'from_name' => 'Ms. Foo Bar',
+                                'attachments' => [
+                                    'content_base64' => 'dGVzdGNvbnRlbnQ=',
+                                    'filename' => 'test.jpg',
+                                    'content_type' => 'image/jpeg'
+                                ]
+                            ]
+                        ]
+                    ],
+                ]
+            )
+            ->willReturn($response);
 
         $mailer = new TeneoApiTransport('mailclass-test', 'bar', $httpClient);
         $mailer->send($email);
