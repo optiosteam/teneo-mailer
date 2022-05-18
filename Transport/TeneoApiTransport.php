@@ -58,10 +58,6 @@ class TeneoApiTransport extends AbstractApiTransport
 
     protected function doSendApi(SentMessage $sentMessage, Email $email, Envelope $envelope): ResponseInterface
     {
-        if (0 < count($email->getAttachments())) {
-            throw new TransportException('Teneo api does not support attachments.');
-        }
-
         $response = $this->client->request(
             'POST',
             'https://' . $this->getEndpoint() . '/api/v1/send.json',
