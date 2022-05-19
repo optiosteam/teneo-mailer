@@ -58,10 +58,6 @@ class TeneoApiTransport extends AbstractApiTransport
 
     protected function doSendApi(SentMessage $sentMessage, Email $email, Envelope $envelope): ResponseInterface
     {
-        if (0 < count($email->getAttachments())) {
-            throw new TransportException('Teneo api does not support attachments.');
-        }
-
         $response = $this->client->request(
             'POST',
             'https://' . $this->getEndpoint() . '/api/v1/send.json',
@@ -151,6 +147,11 @@ class TeneoApiTransport extends AbstractApiTransport
             'headers' => $this->getHeaders($email->getHeaders()),
         ];
 
+
+        if (count($email->getAttachments()) > 0) {
+            $payload['attachments'] = $this->getAttachmentsPayload($email);
+        }
+
         $fromName = $envelope->getSender()->getName();
         if ($fromName) {
             $payload[ 'from_name' ] = $fromName;
@@ -194,5 +195,26 @@ class TeneoApiTransport extends AbstractApiTransport
         }
 
         return $result;
+    }
+
+
+    /**
+     * @param Email $email
+     * @return array
+     */
+    private function getAttachmentsPayload(Email $email): array
+    {
+        $payload = [];
+        foreach ($email->getAttachments() as $attachment) {
+            $headers   = $attachment->getPreparedHeaders();
+            $filename  = $headers->getHeaderParameter('Content-Disposition', 'filename');
+            $payload[] = [
+                'content_base64' => base64_encode($attachment->getBody()),
+                'filename' => $filename,
+                'content_type' => $attachment->getMediaType() . '/' . $attachment->getMediaSubtype()
+            ];
+        }
+
+        return $payload;
     }
 }

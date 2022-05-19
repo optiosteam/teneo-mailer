@@ -12,7 +12,7 @@ Provides Teneo integration for Symfony Mailer.
 
 ### Install 
 ```shell
-composer require teneo/optios-mailer
+composer require optios/teneo-mailer
 ```
 
 ### Configuration
